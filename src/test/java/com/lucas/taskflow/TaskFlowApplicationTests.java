@@ -1,4 +1,4 @@
-package com.lucas.taskflow.taskflow;
+package com.lucas.taskflow.temp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
