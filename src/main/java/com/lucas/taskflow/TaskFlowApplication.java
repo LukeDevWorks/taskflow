@@ -1,4 +1,4 @@
-package com.lucas.taskflow.temp;
+package com.lucas.taskflow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -20,12 +20,18 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     public AuthResponse register(RegisterRequest request) {
+
         if (userService.usernameExists(request.getUsername())) {
             throw new RuntimeException("Username already taken");
         }
 
+        if (userService.emailExists(request.getEmail())) {
+            throw new RuntimeException("Email already taken");
+        }
+
         User user = User.builder()
                 .username(request.getUsername())
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
@@ -36,9 +42,10 @@ public class AuthService {
         return new AuthResponse(token);
     }
 
+
     public AuthResponse login(LoginRequest request) {
 
-        var userOptional = userService.findByUsername(request.getUsername());
+        var userOptional = userService.findByIdentifier(request.getIdentifier());
 
         if (userOptional.isEmpty()) {
             throw new RuntimeException("User not found");
